@@ -90,6 +90,7 @@ def render_vis(model, objective_f, param_f=None, optimizer=None,
     if use_fixed_seed:  # does not mean results are reproducible, see Args doc
       tf.set_random_seed(0)
 
+    import pdb; pdb.set_trace()
     T = make_vis_T(model, objective_f, param_f, optimizer, transforms,
                    relu_gradient_override)
     print_objective_func = make_print_objective_func(print_objectives, T)
@@ -179,6 +180,7 @@ def make_vis_T(model, objective_f, param_f=None, optimizer=None,
   loss = objective_f(T)
 
 
+  import pdb; pdb.set_trace()
   vis_op = optimizer.minimize(-loss, global_step=global_step)
 
   local_vars = locals()

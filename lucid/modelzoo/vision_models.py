@@ -35,11 +35,18 @@ def populate_inception_bottlenecks(scope):
 
 
 class InceptionV1(Model):
-  model_path = 'gs://modelzoo/InceptionV1.pb'
-  labels_path = 'gs://modelzoo/InceptionV1-labels.txt'
+  model_path = '/home/thanatcha/lucid/lucid/modelzoo/InceptionV1.pb'
+  labels_path = '/home/thanatcha/lucid/lucid/modelzoo/InceptionV1-labels.txt'
   image_shape = [224, 224, 3]
   image_value_range = (-117, 255-117)
   input_name = 'input:0'
 
   def post_import(self, scope):
     populate_inception_bottlenecks(scope)
+
+class SSDMobilenet_v1(Model):
+  model_path = '/home/thanatcha/object_recognition/log/july5_sim_on_real/freeze/graph.pb'
+  labels_path = '/home/thanatcha/object_recognition/data/classes.txt'
+  image_shape = [640, 480, 3]
+  image_value_range = (0, 255)
+  input_name = 'ToFloat:0'
