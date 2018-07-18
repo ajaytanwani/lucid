@@ -33,6 +33,7 @@ def load_text_labels(labels_path):
 
 def load_graphdef(model_url, reset_device=True):
   """Load GraphDef from a binary proto file."""
+  import ipdb; ipdb.set_trace()
   graphdef_string = read(model_url)
   try:
     graph_def = tf.GraphDef.FromString(graphdef_string)
