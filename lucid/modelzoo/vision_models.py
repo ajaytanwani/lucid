@@ -43,10 +43,3 @@ class InceptionV1(Model):
 
   def post_import(self, scope):
     populate_inception_bottlenecks(scope)
-
-class SSDMobilenet_v1(Model):
-  model_path = '/home/thanatcha/object_recognition/log/july5_sim_on_real/freeze/graph.pb'
-  labels_path = '/home/thanatcha/object_recognition/data/classes.txt'
-  image_shape = [640, 480, 3]
-  image_value_range = (0, 255)
-  input_name = 'ToFloat:0'

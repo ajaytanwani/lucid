@@ -9,18 +9,24 @@ import lucid.optvis.render as render
 from lucid.misc.io import show, load
 from lucid.misc.gradient_override import gradient_override_map
 
+from lucid.modelzoo.vision_base import Model
+class SSDMobilenet_v1(Model):
+  model_path = '/home/thanatcha/lucid/mobilenetv1_graphdef_frozen.pb.modelzoo'
+  labels_path = '/home/thanatcha/object_recognition/data/classes.txt'
+  image_shape = [640, 480, 3]
+  image_value_range = (-1, 1)
+  input_name = 'ToFloat'
+
 SSD = False
-#SSD = True
-import pdb; pdb.set_trace()
+SSD = True
 if SSD:
-  model = models.SSDMobilenet_v1()
+  model = SSDMobilenet_v1()
 else:
   model = models.InceptionV1()
 model.load_graphdef()
 
 def neuron_groups(img, layer, n_groups=6, attr_classes=[]):
   # Compute activations
-  import pdb; pdb.set_trace()
   with tf.Graph().as_default(), tf.Session():
     t_input = tf.placeholder_with_default(img, [None, None, 3])
     T = render.import_model(model, t_input, t_input)
