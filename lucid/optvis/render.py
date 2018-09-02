@@ -85,7 +85,8 @@ def render_vis(model, objective_f, param_f=None, optimizer=None,
     multiple channel visualizations stacked on top of each other.
   """
 
-  with tf.Graph().as_default() as graph, tf.Session() as sess:
+  gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=1)
+  with tf.Graph().as_default() as graph, tf.Session(config=tf.ConfigProto(gpu_options=gpu_options)) as sess:
 
     if use_fixed_seed:  # does not mean results are reproducible, see Args doc
       tf.set_random_seed(0)
@@ -179,7 +180,6 @@ def make_vis_T(model, objective_f, param_f=None, optimizer=None,
   loss = objective_f(T)
 
 
-  import pdb; pdb.set_trace()
   vis_op = optimizer.minimize(-loss, global_step=global_step)
 
   local_vars = locals()
